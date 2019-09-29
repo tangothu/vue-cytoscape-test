@@ -34,6 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+      '~/plugins/vue-cytoscape',
   ],
 
   /*
@@ -60,16 +61,16 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
+    //extend(config, ctx) {
+    //  // Run ESLint on save
+    //  if (ctx.isDev && ctx.isClient) {
+    //    config.module.rules.push({
+    //      enforce: 'pre',
+    //      test: /\.(js|vue)$/,
+    //      loader: 'eslint-loader',
+    //      exclude: /(node_modules)/
+    //    })
+    //  }
+    //}
   }
 }

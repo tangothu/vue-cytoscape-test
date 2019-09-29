@@ -1,34 +1,14 @@
 <template>
   <section class="section">
-    <div class="columns is-mobile">
+    <div>
 
-      <card
-        title="Free"
-        icon="github-circle"
-      >
-        Open source on <a href="https://github.com/buefy/buefy"> GitHub</a>
-      </card>
-
-      <card
-        title="Responsive"
-        icon="cellphone-link"
-      >
-        <b class="has-text-grey">Every</b> component is responsive
-      </card>
-
-      <card
-        title="Modern"
-        icon="alert-decagram"
-      >
-        Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a>
-      </card>
-
-      <card
-        title="Lightweight"
-        icon="arrange-bring-to-front"
-      >
-        No other internal dependency
-      </card>
+      <cytoscape ref="cy" :config="config">
+        <cy-element
+          v-for="def in elements"
+          :key="`${def.data.id}`"
+          :definition="def"
+        />
+      </cytoscape>
 
     </div>
   </section>
@@ -39,9 +19,44 @@ import Card from '~/components/Card'
 
 export default {
   name: 'HomePage',
-
   components: {
     Card
+  },
+  data() {
+    return {
+      elements: [
+        { // node a
+          data: { id: 'a' }
+        }, { // node b
+          data: { id: 'b' }
+        }, { // edge ab
+          data: { id: 'ab', source: 'a', target: 'b' }
+        }
+      ],
+      config: {
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'background-color': '#666',
+              'label': 'data(id)'
+            }
+          }, {
+            selector: 'edge',
+            style: {
+              'width': 3,
+              'line-color': '#ccc',
+              'target-arrow-color': '#ccc',
+              'target-arrow-shape': 'triangle'
+            }
+          }
+        ],
+        layout: {
+          name: 'grid',
+          rows: 1
+        }
+      }
+    }
   }
 }
 </script>
